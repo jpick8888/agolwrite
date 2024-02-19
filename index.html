@@ -20,8 +20,10 @@
    "esri/Graphic",  
    "esri/layers/GraphicsLayer",
    "esri/geometry/Polyline",
-   "esri/geometry/Polygon"
-  ], function (esriConfig,Map, MapView, Graphic, GraphicsLayer, Polyline, Polygon) {
+   "esri/geometry/Polygon",
+   //adding in the module for the feature layers
+   "esri/layers/FeatureLayer"
+  ], function (esriConfig,Map, MapView, Graphic, GraphicsLayer, Polyline, Polygon, FeatureLayer) {
 
    esriConfig.apiKey = "AAPK6a0e40e0c7584766bd0465bfdf4e9c47A0l6-hh-vuT_78RTwWVul2CsxgjEGw0QVGUBaBJUYZ_C3oE3ps1rsei8uf5gB6HW";
    const map = new Map({
@@ -117,6 +119,21 @@
    });
 
    graphicsLayer.add(pointGraphic); // Add the point to the graphics layer
+
+   // Define a pop-up for usaeduLayer
+   const popupEduusa = {
+    "title": "EDUs",
+    "content": "<b>Name:</b> {INSTNM}<br><b>Address:</b> {ADDR}<br><b>Total Enrollment:</b> {INSTSIZE}<br><b>Sector:</b> {SECTOR}<br><b>General Information Telephone Number:</b> {GENTELE}<br>"
+   }
+
+   const usaeduLayer = new FeatureLayer({
+    url: "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Colleges_and_Universities_View/FeatureServer", //get URL from AGOL Item Page
+    //adding the popup here
+    outFields: ["INSTNM", "ADDR", "INSTSIZE", "SECTOR", "GENTELE"],
+    popupTemplate: popupEduusa
+   });
+
+   map.add(usaeduLayer);
 
   });
  </script>
