@@ -140,6 +140,23 @@
     outFields: ["*"],
    });
 
+   const airportRenderer = {
+        "type": "simple",
+        "symbol": {
+          "type": "picture-marker",
+          "url": "flight_FILL0_wght400_GRAD0_opsz24.png",
+          "width": "18px",
+          "height": "18px"
+        }
+      }
+
+   const airportLayer = new FeatureLayer({
+       url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/US_Airports/FeatureServer",
+       renderer: airportRenderer
+     });
+
+   map.add(airportLayer);
+
    map.add(usAirportsLayer);
 
   });
