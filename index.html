@@ -18,7 +18,9 @@
       "esri/Map",
       "esri/views/MapView",
       "esri/Graphic",  
-      "esri/layers/GraphicsLayer" 
+      "esri/layers/GraphicsLayer"
+      "esri/geometry/Polyline",
+      "esri/geometry/Polygon"
     ], function (esriConfig,Map, MapView, Graphic, GraphicsLayer) {
 
       esriConfig.apiKey = "AAPK6a0e40e0c7584766bd0465bfdf4e9c47A0l6-hh-vuT_78RTwWVul2CsxgjEGw0QVGUBaBJUYZ_C3oE3ps1rsei8uf5gB6HW";
@@ -32,15 +34,69 @@
           zoom: 13, // Zoom level
           container: "viewDiv" // Div element
         });
+      
+      const polyline = new Polyline({
+       paths: [
+        [-97.75, 30.26], // Start point
+        [-97.74, 30.27]  // End point
+       ]
+      });
 
+      const polylineSymbol = {
+       type: "simple-line",
+       color: [226, 119, 40], // Orange
+       width: 2
+      };
+
+      const polylineGraphic = new Graphic({
+       geometry: polyline,
+       symbol: polylineSymbol
+      });
+
+      graphicsLayer.add(polylineGraphic);
+
+      const polygon = new Polygon({
+       rings: [
+        [-97.75, 30.26], // First point
+        [-97.74, 30.27], // Second point
+        [-97.73, 30.26]  // Third point
+       ]
+      });
+
+      const polygonSymbol = {
+       type: "simple-fill",
+       color: [227, 139, 79, 0.8], // Orange, semi-transparent
+       outline: {
+        color: [255, 255, 255], // White
+        width: 1
+       }
+      };
+
+      const polygonGraphic = new Graphic({
+       geometry: polygon,
+       symbol: polygonSymbol
+      });
+
+      graphicsLayer.add(polygonGraphic);
+      
       // Create a new graphics layer
       const graphicsLayer = new GraphicsLayer();
       map.add(graphicsLayer);
+
+      const popupTemplate = {
+          title: "{Name}",
+          content: "{Description}"
+       };
+      const attributes = {
+         Name: "Stevie Ray Vaughan Statue",
+         Description: "A bronze sculpture of Stevie Ray Vaughan by Ralph Helmick"
+      };
 
       const point = { //Create a point  
         type: "point",  
         longitude: -97.750689,    //long lat of Stevie Ray Vaughan Statue
         latitude: 30.263098
+
       };
 
       const simpleMarkerSymbol = {  
@@ -55,7 +111,9 @@
 
       const pointGraphic = new Graphic({  
         geometry: point,  
-        symbol: simpleMarkerSymbol  
+        symbol: simpleMarkerSymbol,
+        attributes: attributes,
+        popupTemplate: popupTemplate  
       });
 
       graphicsLayer.add(pointGraphic); // Add the point to the graphics layer
