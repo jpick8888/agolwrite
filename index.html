@@ -152,12 +152,14 @@
 
    const airportLayer = new FeatureLayer({
        url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/US_Airports/FeatureServer",
-       renderer: airportRenderer
-     });
+       renderer: airportRenderer,
+       definitionExpression: "Fac_Type = 'AIRPORT'" //adding sql to filter for airports
+   
+   });
 
    map.add(airportLayer);
 
-   map.add(usAirportsLayer);
+   // map.add(usAirportsLayer);
 
   });
  </script>
