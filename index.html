@@ -16,8 +16,10 @@
     require([
      "esri/config",
       "esri/Map",
-      "esri/views/MapView"
-    ], function (esriConfig,Map, MapView) {
+      "esri/views/MapView",
+      "esri/Graphic",  
+      "esri/layers/GraphicsLayer" 
+    ], function (esriConfig,Map, MapView, Graphic, GraphicsLayer) {
 
       esriConfig.apiKey = "AAPK6a0e40e0c7584766bd0465bfdf4e9c47A0l6-hh-vuT_78RTwWVul2CsxgjEGw0QVGUBaBJUYZ_C3oE3ps1rsei8uf5gB6HW";
       const map = new Map({
@@ -30,6 +32,10 @@
           zoom: 13, // Zoom level
           container: "viewDiv" // Div element
         });
+
+        // Create a new graphics layer
+        const graphicsLayer = new GraphicsLayer();
+        map.add(graphicsLayer);
     });
   </script>
 
