@@ -135,6 +135,13 @@
 
    map.add(usaeduLayer);
 
+   const usAirportsLayer = new FeatureLayer({
+    url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/US_Airports_8/FeatureServer",
+    outFields: ["*"],
+   });
+
+   map.add(usAirportsLayer);
+
   });
  </script>
 
