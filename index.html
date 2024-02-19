@@ -33,7 +33,7 @@
           container: "viewDiv" // Div element
         });
 
-        // Create a new graphics layer
+      // Create a new graphics layer
       const graphicsLayer = new GraphicsLayer();
       map.add(graphicsLayer);
 
@@ -49,7 +49,8 @@
         outline: {  
           color: [255, 255, 255], // White  
           width: 1
-        }  
+        },
+        style: "triangle"  
       };
 
       const pointGraphic = new Graphic({  
