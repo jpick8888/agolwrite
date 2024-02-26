@@ -284,7 +284,25 @@
 
 			// Add Legend widget to view
 			const legend = new Legend({
-        view: view
+        view: view,
+        layerInfos: [
+            {
+                layer: airportLayer,
+                title: "Airport"
+            },
+            {
+                layer: heliportLayer,
+                title: "Heliport"
+            },
+            {
+                layer: myAirports,
+                title: "My Airport"
+            },
+            {
+                layer: usaeduLayer,
+                title: "Colleges and Universities"
+            },
+        ]
     });
 
 				view.ui.add(legend, "bottom-left");
