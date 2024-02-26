@@ -223,16 +223,48 @@
 
    // map.add(usAirportsLayer);
 
-   //adding the const for the feature layer
-			const myAirports = new FeatureLayer({
-			url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/My_Airports_JP/FeatureServer",
-			
-			//adding the popup here
-			outFields: ["AirportCode"],
+   // Update the symbol for myAirports layer
+			const airportIconSymbol = {
+							type: "picture-marker",
+							url: "flight_takeoff_FILL0_wght400_GRAD0_opsz24.png",
+							width: "32px",
+							height: "32px"
+			};
 
+			// Update the renderer for myAirports layer
+			const airportIconRenderer = {
+							type: "simple",
+							symbol: airportIconSymbol
+			};
+
+			const AirportLabels = {
+    symbol: {
+        type: "text",
+        color: "#000000",
+        haloColor: "#FFFFFF",
+        haloSize: "1px",
+        font: {
+            size: "12px",
+            family: "Noto Sans",
+            style: "italic",
+            weight: "normal"
+        }
+    },
+    labelPlacement: "above-center",
+    labelExpressionInfo: {
+        expression: "$feature.AirportCode" // Display the AirportCode attribute as the label
+    }
+};
+
+			// Update the myAirports layer with the new renderer
+			const myAirports = new FeatureLayer({
+							url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/My_Airports_JP/FeatureServer",
+							outFields: ["AirportCode"],
+							renderer: airportIconRenderer,
+							labelingInfo: [AirportLabels]
 			});
 
-			//adding the feature layer to the map
+			// Add the updated myAirports layer to the map
 			map.add(myAirports);
 
 			// Set the point layer's LayerInfo
