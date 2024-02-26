@@ -25,9 +25,10 @@
    "esri/layers/FeatureLayer",
 
    //adding editor widget
-    "esri/widgets/Editor"
+    "esri/widgets/Editor",
+				"esri/widgets/Legend"
 
-  ], function (esriConfig,Map, MapView, Graphic, GraphicsLayer, Polyline, Polygon, FeatureLayer, Editor) {
+  ], function (esriConfig,Map, MapView, Graphic, GraphicsLayer, Polyline, Polygon, FeatureLayer, Editor, Legend) {
 
    esriConfig.apiKey = "AAPK6a0e40e0c7584766bd0465bfdf4e9c47A0l6-hh-vuT_78RTwWVul2CsxgjEGw0QVGUBaBJUYZ_C3oE3ps1rsei8uf5gB6HW";
    const map = new Map({
@@ -281,7 +282,14 @@
 			// Add the widget to the view
 			view.ui.add(editor, "top-right");
 
-  });
+			// Add Legend widget to view
+			const legend = new Legend({
+        view: view
+    });
+
+				view.ui.add(legend, "bottom-left");
+});
+
  </script>
 
  <!-- css to make a full screen map -->
